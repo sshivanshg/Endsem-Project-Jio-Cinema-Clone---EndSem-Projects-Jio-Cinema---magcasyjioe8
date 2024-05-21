@@ -34,7 +34,6 @@ const MoviePoster = (props) => {
         <>
         <div className="flex-shrink-0 mr-4" onClick={handlePosterClick} style={{ maxWidth: '200px' }}>
             <img src={props.imageUrl} alt={props.title} style={{ maxWidth: '200px', height: '200px' }} className="w-full h-auto rounded-lg shadow-lg" />
-            <p className="mt-2 text-lg font-medium">{props.title}</p>
             {showPopup && (
             <MoviePopup
             title={props.title}

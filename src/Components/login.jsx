@@ -1,18 +1,16 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const SignInPage = () => {
+const LoginPage = (props)=>{
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [appType, setAppType] = useState("ott");
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email || !password) {
-      alert("All fields are required");
-      return;
-    }
 
     const myHeaders = new Headers();
     myHeaders.append("accept", "application/json");
@@ -22,7 +20,7 @@ const SignInPage = () => {
     const raw = JSON.stringify({
       email,
       password,
-      appType: "ott"
+      appType,
     });
 
     const requestOptions = {
@@ -34,14 +32,16 @@ const SignInPage = () => {
 
     try {
       const response = await fetch(
-        "https://academics.newtonschool.co/api/v1/user/signin",
+        "https://academics.newtonschool.co/api/v1/user/login",
         requestOptions
       );
       const data = await response.json();
-      if (data.status === "success") {
-        navigate("/home");
-      } else {
-        setErrorMessage(data.message);
+      console.log(data.status);
+      if (data.status == "success"){
+        navigate("/home")
+        props.setLoginStatus(true)
+      } else{
+        setErrorMessage("Wrong Credentials!")
         setTimeout(() => {
           setErrorMessage("");
         }, 5000);
@@ -70,7 +70,7 @@ const SignInPage = () => {
             placeholder="Password"
             className="w-full px-2 py-2 rounded-md text-sm border-b border-gray-600 bg-[#0D0e10] text-white placeholder-gray-500 focus:outline-none focus:border-white"
           />
-          <button type="submit" className="w-full py-2 bg-purple-700 text-white  rounded-md hover:bg-purple-800 focus:outline-none">
+          <button onClick={handleSubmit} className="w-full py-2 bg-purple-700 text-white  rounded-md hover:bg-purple-800 focus:outline-none">
             Continue
           </button>
           {errorMessage && (
@@ -87,4 +87,4 @@ const SignInPage = () => {
     </div>
   );
 };
-export default SignInPage;
+export default LoginPage;
