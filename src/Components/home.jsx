@@ -13,6 +13,8 @@ const HomePage = (props) => {
     const [documentary, setDocumentary] = useState([]);
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [title, setTitle] = useState("");
+    const [key, setKey] = useState("");
 
     const navigate = useNavigate();
 
@@ -59,18 +61,18 @@ const HomePage = (props) => {
         fetchData();
     }, []);
 
-    const handleMovieClick = (url) => {
-        props.loginStatus ? setPlayMovie(url) : navigate("/home/signin");
-    };
+    const handleMovieClick = (url,title,key,discption) => {
+        props.loginStatus ? setPlayMovie([url,title,key,discption]) : navigate("/home/signin");
+        };
 
     if (loading) {
-        return <div className="container mx-auto pt-[80px]">Loading...</div>;
+        return <div className="container mx-auto pt-[80px]">Loading.....</div>;
     }
 
     return (
         <div className=" pt-[80px] bg-[#0D0e10] text-white">
             {playMovie ? (
-                <VideoPlayer videoUrl={playMovie} onClose={() => setPlayMovie(null)} />
+                <VideoPlayer title={playMovie[1]} keyWords={playMovie[2]} videoUrl={playMovie[0]} discption={playMovie[3]} onClose={() => setPlayMovie(null)} />
             ) : (
                 <>
                     <section className="my-8 mt-0">
@@ -84,6 +86,7 @@ const HomePage = (props) => {
                                     videoUrl={movie.video_url}
                                     keyWords={movie.keywords.slice(0, 2).join(" . ")}
                                     loginStatus={props.loginStatus}
+                                    discption={movie.discption}
                                     onClick={handleMovieClick}
                                 />
                             ))}
@@ -101,6 +104,7 @@ const HomePage = (props) => {
                                     videoUrl={movie.video_url}
                                     keyWords={movie.keywords.slice(0, 2).join(" . ")}
                                     loginStatus={props.loginStatus}
+                                    discption={movie.discption}
                                     onClick={handleMovieClick}
                                 />
                             ))}
@@ -118,6 +122,7 @@ const HomePage = (props) => {
                                     videoUrl={movie.video_url}
                                     keyWords={movie.keywords.slice(0, 2).join(" . ")}
                                     loginStatus={props.loginStatus}
+                                    discption={movie.discption}
                                     onClick={handleMovieClick}
                                 />
                             ))}
@@ -135,6 +140,7 @@ const HomePage = (props) => {
                                     videoUrl={movie.video_url}
                                     keyWords={movie.keywords.slice(0, 2).join(" . ")}
                                     loginStatus={props.loginStatus}
+                                    discption={movie.discption}
                                     onClick={handleMovieClick}
                                 />
                             ))}
@@ -152,6 +158,7 @@ const HomePage = (props) => {
                                     videoUrl={movie.video_url}
                                     keyWords={movie.keywords.slice(0, 2).join(" . ")}
                                     loginStatus={props.loginStatus}
+                                    discption={movie.discption}
                                     onClick={handleMovieClick}
                                 />
                             ))}
@@ -169,6 +176,7 @@ const HomePage = (props) => {
                                     videoUrl={movie.video_url}
                                     keyWords={movie.keywords.slice(0, 2).join(" . ")}
                                     loginStatus={props.loginStatus}
+                                    discption={movie.discption}
                                     onClick={handleMovieClick}
                                 />
                             ))}
@@ -186,6 +194,7 @@ const HomePage = (props) => {
                                     videoUrl={movie.video_url}
                                     keyWords={movie.keywords.slice(0, 2).join(" . ")}
                                     loginStatus={props.loginStatus}
+                                    discption={movie.discption}
                                     onClick={handleMovieClick}
                                 />
                             ))}

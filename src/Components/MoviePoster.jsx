@@ -8,11 +8,11 @@ const MoviePoster = (props) => {
     const navigate = useNavigate();
 
 
-    const MoviePopup = ({ title, keyWords, trailerUrl, onClick}) => (
+    const MoviePopup = ({ title, keyWords, trailerUrl, dis, onClick}) => (
         <div className="popup mb-2">
           <div className="popup-content">
             <p className="font-normal text-lg">{keyWords}</p>
-            <a onClick={()=> onClick(trailerUrl)} className="font-normal text-lg border border-solid p-2 pr-3 pl-3 border-black rounded-md cursor-pointer">Watch Now</a>
+            <a onClick={()=> onClick(trailerUrl,title,keyWords,dis)} className="font-normal text-lg border border-solid p-2 pr-3 pl-3 border-black rounded-md cursor-pointer">Watch Now</a>
           </div>
         </div>
       );
@@ -39,6 +39,7 @@ const MoviePoster = (props) => {
             title={props.title}
             keyWords={props.keyWords}
             trailerUrl={props.videoUrl}
+            dis={props.discption}
             onClick = {props.onClick}
         />
       )}
@@ -50,3 +51,5 @@ const MoviePoster = (props) => {
 };
 
 export default MoviePoster;
+
+
